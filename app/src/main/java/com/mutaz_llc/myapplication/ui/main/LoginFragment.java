@@ -25,7 +25,6 @@ public class LoginFragment extends Fragment {
 
     EditText username_input_field;
     EditText password_input_field;
-    TextView test;
     Button login_button;
     TextView sign_up;
 
@@ -60,23 +59,31 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         login_button = view.findViewById(R.id.login_button);
         sign_up = view.findViewById(R.id.sign_up_link);
-        test = view.findViewById(R.id.test);
 
         view.findViewById(R.id.sign_up_link).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 // replace fragment to sign up fragment
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                SignUpFragment signUpFragment = new SignUpFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_container,signUpFragment)
+                        .setCustomAnimations(R.anim.enter_left_to_right,R.anim.exit_left_to_right,R.anim.enter_right_to_left,R.anim.exit_right_to_left)
+                        .addToBackStack(null)
+                        .commit();
+
             }
         });
         login_button.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                test.setText("clicked");
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 RestaurantFragment restaurantFragment = new RestaurantFragment();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.login_container,restaurantFragment)
+                        .replace(R.id.main_container,restaurantFragment)
+                        .setCustomAnimations(R.anim.enter_left_to_right,R.anim.exit_left_to_right,R.anim.enter_right_to_left,R.anim.exit_right_to_left)
                         .addToBackStack(null)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
 
             }

@@ -34,9 +34,9 @@ public class Meal {
         return price;
     }
     public String getPriceString() {
-        String beforeP = Double.toString(price).split(".")[0];
-        String afterP = Double.toString(price).split(".")[1];
-        return afterP.length()>1?beforeP+"."+afterP.charAt(0):beforeP;
+//        String beforeP = Double.toString(price).split(".")[0];
+//        String afterP = Double.toString(price).split(".")[1];
+        return Double.toString(price);
     }
     public boolean isAvailable() {
         return isAvailable;

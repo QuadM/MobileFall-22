@@ -45,7 +45,7 @@ public class MealsRecyclerAdapter extends RecyclerView.Adapter<MealsRecyclerAdap
         holder.itemName.setText(mealsList.get(position).getName());
         holder.itemDescription.setText(mealsList.get(position).getDescription());
         holder.itemPrice.setText(mealsList.get(position).getPriceString());
-        holder.itemImage.setImageURI(Uri.parse(mealsList.get(position).getImageUrl()));
+        holder.itemImage.setImageResource(R.color.purple_500);
 
         holder.incrementBtn.setOnClickListener(new View.OnClickListener() {
             @Override

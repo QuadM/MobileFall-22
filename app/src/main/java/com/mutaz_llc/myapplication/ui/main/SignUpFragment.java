@@ -46,21 +46,21 @@ public class SignUpFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        return inflater.inflate(R.layout.fragment_sign_up, container, false);
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getView().findViewById(R.id.sign_up_link).setOnClickListener(new View.OnClickListener(){
+        getView().findViewById(R.id.sign_in_link).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 LoginFragment loginFragment = new LoginFragment();
                 fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.enter_left_to_right,R.anim.exit_left_to_right,
-                                R.anim.enter_right_to_left,R.anim.exit_right_to_left)
-                        .replace(R.id.sign_up_container,loginFragment)
+                        .setCustomAnimations(R.anim.enter_right_to_left,R.anim.exit_right_to_left,
+                                R.anim.enter_left_to_right,R.anim.exit_left_to_right)
+                        .replace(R.id.main_container,loginFragment)
                         .addToBackStack(null)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();

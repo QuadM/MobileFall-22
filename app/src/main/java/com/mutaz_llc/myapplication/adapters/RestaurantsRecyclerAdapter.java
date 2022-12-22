@@ -55,11 +55,9 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 FragmentManager fragmentManager = ((MainActivity)mContext).getSupportFragmentManager();
                 MealFragment fragment = new MealFragment();
-                fragmentManager.beginTransaction().replace(viewId, fragment).commit();
-
+                fragmentManager.beginTransaction().replace(R.id.main_container, fragment).commit();
             }
         });
         holder.itemName.setText(restaurantsList.get(position).getName());
