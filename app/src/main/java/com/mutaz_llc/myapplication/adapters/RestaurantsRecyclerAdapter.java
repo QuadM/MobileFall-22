@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.mutaz_llc.myapplication.MainActivity;
 import com.mutaz_llc.myapplication.MealFragment;
 import com.mutaz_llc.myapplication.R;
@@ -26,15 +28,14 @@ import java.util.List;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<RestaurantsRecyclerAdapter.MyViewHolder> {
+public class RestaurantsRecyclerAdapter extends FirebaseRecyclerAdapter<Restaurant,RestaurantsRecyclerAdapter.MyViewHolder> {
 
-    private List<Restaurant> restaurantsList = new ArrayList<>();
     private final Context mContext;
     int viewId;
 
-    public RestaurantsRecyclerAdapter(Context context, List<Restaurant> restaurantsList, int viewId){
+    public RestaurantsRecyclerAdapter(Context context, FirebaseRecyclerOptions<Restaurant> restaurantsList, int viewId){
+        super(restaurantsList);
         this.mContext = context;
-        this.restaurantsList = restaurantsList;
         this.viewId = viewId;
     }
 
@@ -49,7 +50,7 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Restaurant model) {
         int thisId = View.generateViewId();
         holder.container.setId(thisId);
         holder.container.setOnClickListener(new View.OnClickListener() {
@@ -57,23 +58,20 @@ public class RestaurantsRecyclerAdapter extends RecyclerView.Adapter<Restaurants
             public void onClick(View view) {
                 FragmentManager fragmentManager = ((MainActivity)mContext).getSupportFragmentManager();
                 MealFragment fragment = new MealFragment();
-                fragmentManager.beginTransaction().replace(R.id.main_container, fragment).commit();
+                fragmentManager.beginTransaction().replace(R.id.main_container, fragment)
+                        .addToBackStack("Restaurants")
+                        .setCustomAnimations(R.anim.enter_left_to_right,R.anim.exit_left_to_right,R.anim.enter_right_to_left,R.anim.exit_right_to_left)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit();
             }
         });
-        holder.itemName.setText(restaurantsList.get(position).getName());
-        holder.itemDescription.setText(restaurantsList.get(position).getDescription());
-        String txt = "rating:"+restaurantsList.get(position).getRatingString();
+        holder.itemName.setText(model.getName());
+        holder.itemDescription.setText(model.getDescription());
+        String txt = "rating:"+model.getRatingString();
         holder.itemRating.setText(txt);
         holder.itemImage.setImageResource(R.color.purple_500);
 
 
-
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return restaurantsList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

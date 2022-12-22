@@ -18,7 +18,6 @@ import com.mutaz_llc.myapplication.adapters.MealsRecyclerAdapter;
 import com.mutaz_llc.myapplication.models.Meal;
 import com.mutaz_llc.myapplication.models.Restaurant;
 import com.mutaz_llc.myapplication.models.User;
-import com.mutaz_llc.myapplication.placeholder.PlaceholderContent;
 
 import java.util.ArrayList;
 import java.util.List;

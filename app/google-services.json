@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "830427040890",
+    "firebase_url": "https://mobile-cse431-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "mobile-cse431",
+    "storage_bucket": "mobile-cse431.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830427040890:android:211e49f00db33a93f53fc3",
+        "android_client_info": {
+          "package_name": "com.mutaz_llc.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830427040890-k7q3ki7dfmg7fdpmg3fe0d2s138crm1s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk4UFVq0kLrqVtJ-XisauyJ5jo1GSyvKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830427040890-k7q3ki7dfmg7fdpmg3fe0d2s138crm1s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830427040890:android:be51ee9ee68b670bf53fc3",
+        "android_client_info": {
+          "package_name": "com.quadm_llc.assignment_2_18p2847"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830427040890-k7q3ki7dfmg7fdpmg3fe0d2s138crm1s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk4UFVq0kLrqVtJ-XisauyJ5jo1GSyvKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830427040890-k7q3ki7dfmg7fdpmg3fe0d2s138crm1s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830427040890:android:6de0fd669d89109ef53fc3",
+        "android_client_info": {
+          "package_name": "com.quadm_llc.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830427040890-k7q3ki7dfmg7fdpmg3fe0d2s138crm1s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk4UFVq0kLrqVtJ-XisauyJ5jo1GSyvKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830427040890-k7q3ki7dfmg7fdpmg3fe0d2s138crm1s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
