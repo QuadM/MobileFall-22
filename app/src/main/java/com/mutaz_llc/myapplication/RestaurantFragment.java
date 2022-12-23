@@ -15,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
@@ -78,6 +79,7 @@ public class RestaurantFragment extends Fragment {
                     @Override
                     public Restaurant parseSnapshot(@NonNull DataSnapshot snapshot) {
                         Restaurant r = snapshot.getValue(Restaurant.class);
+                        r.setUid(snapshot.getKey());
                         return r;
                     }
                 }).build();

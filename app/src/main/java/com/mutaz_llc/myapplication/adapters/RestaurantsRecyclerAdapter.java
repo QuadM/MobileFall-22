@@ -3,6 +3,8 @@ package com.mutaz_llc.myapplication.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.mutaz_llc.myapplication.MainActivity;
 import com.mutaz_llc.myapplication.MealFragment;
 import com.mutaz_llc.myapplication.R;
+import com.mutaz_llc.myapplication.models.Meal;
 import com.mutaz_llc.myapplication.models.Restaurant;
 import com.mutaz_llc.myapplication.ui.main.SignUpFragment;
 
@@ -44,7 +47,6 @@ public class RestaurantsRecyclerAdapter extends FirebaseRecyclerAdapter<Restaura
     public RestaurantsRecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater =LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.fragment_restaurant_item,parent,false);
-
         return new RestaurantsRecyclerAdapter.MyViewHolder(view);
     }
 
@@ -56,18 +58,26 @@ public class RestaurantsRecyclerAdapter extends FirebaseRecyclerAdapter<Restaura
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle b = new Bundle();
+                b.putString("restaurant_id",  model.getUid());
                 FragmentManager fragmentManager = ((MainActivity)mContext).getSupportFragmentManager();
                 MealFragment fragment = new MealFragment();
+                fragment.setArguments(b);
+
                 fragmentManager.beginTransaction().replace(R.id.main_container, fragment)
                         .addToBackStack("Restaurants")
-                        .setCustomAnimations(R.anim.enter_left_to_right,R.anim.exit_left_to_right,R.anim.enter_right_to_left,R.anim.exit_right_to_left)
+                        .setCustomAnimations
+                                (R.anim.enter_left_to_right
+                                ,R.anim.exit_left_to_right
+                                ,R.anim.enter_right_to_left
+                                ,R.anim.exit_right_to_left)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
             }
         });
         holder.itemName.setText(model.getName());
         holder.itemDescription.setText(model.getDescription());
-        String txt = "rating:"+model.getRatingString();
+        String txt = "rating:"+Double.toString(model.getRating());
         holder.itemRating.setText(txt);
         holder.itemImage.setImageResource(R.color.purple_500);
 

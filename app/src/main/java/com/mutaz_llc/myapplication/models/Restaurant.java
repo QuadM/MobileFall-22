@@ -1,5 +1,6 @@
 package com.mutaz_llc.myapplication.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant {
@@ -9,10 +10,10 @@ public class Restaurant {
     double rating;
     String name, imageUrl, description;
     User owner;
-    List<Meal> meals;
+    ArrayList<Meal> meals;
     public Restaurant(){};
 
-    public Restaurant(String uid, double rating, String name, String imageUrl, String description, User owner, List<Meal> meals) {
+    public Restaurant(String uid, double rating, String name, String imageUrl, String description, User owner, ArrayList<Meal> meals) {
         this.uid = uid;
         this.rating = rating;
         this.name = name;
@@ -21,13 +22,6 @@ public class Restaurant {
         this.owner = owner;
         this.meals = meals;
 
-    }
-
-    public String getRatingString() {
-//        String beforeP = Double.toString(rating).split(".")[0];
-//        String afterP = Double.toString(rating).split(".")[1];
-//        return afterP.length()>1?(beforeP+"."+afterP.charAt(0)):beforeP;
-        return  Double.toString(rating);
     }
 
     public String getUid() {
@@ -78,11 +72,11 @@ public class Restaurant {
         this.owner = owner;
     }
 
-    public List<Meal> getMeals() {
+    public ArrayList<Meal> getMeals() {
         return meals;
     }
 
-    public void setMeals(List<Meal> meals) {
+    public void setMeals(ArrayList<Meal> meals) {
         this.meals = meals;
     }
 }

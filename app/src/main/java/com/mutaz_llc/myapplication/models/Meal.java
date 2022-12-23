@@ -1,6 +1,6 @@
 package com.mutaz_llc.myapplication.models;
 
-public class Meal {
+public class Meal  {
     protected String uid;
     String name,imageUrl,description;
     double price;
@@ -16,12 +16,6 @@ public class Meal {
         this.price = price;
         this.isAvailable = isAvailable;
         this.count=0;
-    }
-
-    public String getPriceString() {
-//        String beforeP = Double.toString(price).split(".")[0];
-//        String afterP = Double.toString(price).split(".")[1];
-        return Double.toString(price);
     }
 
     public String getUid() {
