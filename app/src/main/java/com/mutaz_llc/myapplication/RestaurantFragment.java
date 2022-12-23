@@ -92,6 +92,7 @@ public class RestaurantFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         View logout_button = getActivity().findViewById(R.id.logout_button);
+        getActivity().findViewById(R.id.top_bar).setVisibility(view.VISIBLE);
         logout_button.setVisibility(view.VISIBLE);
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +102,8 @@ public class RestaurantFragment extends Fragment {
                 LoginFragment lf = LoginFragment.newInstance();
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 fm.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).replace(R.id.main_container,lf).commit();
+                getActivity().findViewById(R.id.top_bar).setVisibility(view.GONE);
+                logout_button.setOnClickListener(null);
             }
         });
     }

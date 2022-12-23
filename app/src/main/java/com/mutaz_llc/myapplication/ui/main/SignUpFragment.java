@@ -65,6 +65,7 @@ public class SignUpFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
+
         sign_in_link = getView().findViewById(R.id.sign_in_link);
         sign_up_button = getView().findViewById(R.id.sign_up_button);
         username_input_field = getView().findViewById(R.id.sign_up_username_input_field);
@@ -105,6 +106,7 @@ public class SignUpFragment extends Fragment {
                 }
                 else {
                     mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
