@@ -24,6 +24,7 @@ import com.mutaz_llc.myapplication.R;
 import com.mutaz_llc.myapplication.models.Meal;
 import com.mutaz_llc.myapplication.models.Restaurant;
 import com.mutaz_llc.myapplication.ui.main.SignUpFragment;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +80,13 @@ public class RestaurantsRecyclerAdapter extends FirebaseRecyclerAdapter<Restaura
         holder.itemDescription.setText(model.getDescription());
         String txt = "rating:"+Double.toString(model.getRating());
         holder.itemRating.setText(txt);
-        holder.itemImage.setImageResource(R.color.purple_500);
+//        holder.itemImage.setImageResource(R.color.purple_500);
+        Picasso.get()
+                .load(model.getImageUrl())
+                .placeholder(R.drawable.global_layout)
+                .resize(250,250)
+                .centerInside()
+                .into(holder.itemImage);
 
 
     }

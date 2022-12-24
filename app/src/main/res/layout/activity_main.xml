@@ -44,10 +44,16 @@
         </LinearLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-    <FrameLayout
-        android:layout_weight="1"
-        android:id="@+id/main_container"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:layout_weight="1"
+        >
+        <FrameLayout
+            android:id="@+id/main_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </androidx.cardview.widget.CardView>
+
 </androidx.appcompat.widget.LinearLayoutCompat>

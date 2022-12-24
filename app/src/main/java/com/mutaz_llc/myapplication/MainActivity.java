@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
 //            ArrayList<Meal> mealList = new ArrayList<>();
 //            for (int j = 0; j < 10; j++) {
 //                String uidm = UUID.randomUUID().toString();
-//                mealList.add(new Meal(uidm, "sandwich" + Integer.toString(i) + Integer.toString(j), "", "description", 35, true));
+//                mealList.add(new Meal(uidm, "sandwich" + Integer.toString(i) + Integer.toString(j), "https://images.deliveryhero.io/image/talabat/Menuitems/20200119_Talabat_Qat_637470879621511982.jpg", "description", 35, true));
 //            }
 //            String uid = UUID.randomUUID().toString();
-//            restaurantList.put(uid, new Restaurant(uid, i, "Nagaf " + Integer.toString(i), "", "description " + Integer.toString(i), u, mealList));
+//            restaurantList.put(uid, new Restaurant(uid, i, "Nagaf " + Integer.toString(i), "https://menuegypt.com/restaurants_logos/nagf_logo.jpg", "description " + Integer.toString(i), u, mealList));
 //        }   //---------- init restaurantList
 //        databaseReference.setValue(restaurantList); // --- init DB
         mAuth = FirebaseAuth.getInstance();

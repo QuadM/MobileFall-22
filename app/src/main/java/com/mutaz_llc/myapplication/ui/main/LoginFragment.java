@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,11 +68,34 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
 
+        email_input_field = getView().findViewById(R.id.user_email_input_field);
+        password_input_field = getView().findViewById(R.id.user_password_input_field);
+
         login_button = view.findViewById(R.id.login_button);
         sign_up_link = view.findViewById(R.id.sign_up_link);
 
-        password_input_field = getView().findViewById(R.id.user_password_input_field);
-        email_input_field = getView().findViewById(R.id.user_email_input_field);
+        email_input_field.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (i == KeyEvent.KEYCODE_ENTER)) {
+                    performLogin(view);
+                    return true;
+                }
+                return false;
+            }
+        });
+        password_input_field.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (i == KeyEvent.KEYCODE_ENTER)) {
+                    performLogin(view);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         sign_up_link.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +105,6 @@ public class LoginFragment extends Fragment {
                 SignUpFragment signUpFragment = new SignUpFragment();
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_container, signUpFragment)
-                        .addToBackStack(null)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
 
@@ -91,37 +114,38 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                String email = email_input_field.getText().toString();
-                String password = password_input_field.getText().toString();
-
-                if (email.isEmpty()) {
-                    email_input_field.setError("Please insert your email");
-                    email_input_field.requestFocus();
-                } else if (password.isEmpty()) {
-                    password_input_field.setError("Please insert your password");
-                    password_input_field.requestFocus();
-                } else {
-                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(getActivity(), "Welcome To Wagabati", Toast.LENGTH_SHORT).show();
-                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                RestaurantFragment restaurantFragment = new RestaurantFragment();
-                                fragmentManager.beginTransaction()
-                                        .replace(R.id.main_container, restaurantFragment)
-                                        .addToBackStack(null)
-                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                        .commit();
-                            } else {
-                                Toast.makeText(getActivity(), "Couldn't login, " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-
-
+                performLogin(view);
             }
         });
+    }
+    void performLogin(View view){
+        String email = email_input_field.getText().toString().trim();
+        String password = password_input_field.getText().toString();
+
+        if (email.isEmpty()) {
+            email_input_field.setError("Please insert your email");
+            email_input_field.requestFocus();
+        } else if (password.isEmpty()) {
+            password_input_field.setError("Please insert your password");
+            password_input_field.requestFocus();
+        } else {
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getActivity(), "Welcome To Wagabati", Toast.LENGTH_SHORT).show();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        RestaurantFragment restaurantFragment = new RestaurantFragment();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.main_container, restaurantFragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                .commit();
+                    } else {
+                        Toast.makeText(getActivity(), "Couldn't login, " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
     }
 }

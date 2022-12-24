@@ -113,7 +113,8 @@ public class MealFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            MealsRecyclerAdapter adapter = new MealsRecyclerAdapter(context, mealList);
+
+            MealsRecyclerAdapter adapter = new MealsRecyclerAdapter(context, mealList, view.getWidth());
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(adapter);
 

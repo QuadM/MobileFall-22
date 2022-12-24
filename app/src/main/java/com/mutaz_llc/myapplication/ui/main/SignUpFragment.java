@@ -1,6 +1,7 @@
 package com.mutaz_llc.myapplication.ui.main;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,12 +67,47 @@ public class SignUpFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
 
+
+        username_input_field = getView().findViewById(R.id.sign_up_username_input_field);
+        email_input_field = getView().findViewById(R.id.sign_up_email_input_field);
+        password_input_field = getView().findViewById(R.id.sign_up_password_input_field);
+
         sign_in_link = getView().findViewById(R.id.sign_in_link);
         sign_up_button = getView().findViewById(R.id.sign_up_button);
-        username_input_field = getView().findViewById(R.id.sign_up_username_input_field);
-        password_input_field = getView().findViewById(R.id.sign_up_password_input_field);
-        email_input_field = getView().findViewById(R.id.sign_up_email_input_field);
 
+        username_input_field.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (i == KeyEvent.KEYCODE_ENTER)) {
+                    performSignUp(view);
+                    return true;
+                }
+                return false;
+            }
+        });
+        email_input_field.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (i == KeyEvent.KEYCODE_ENTER)) {
+                    performSignUp(view);
+                    return true;
+                }
+                return false;
+            }
+        });
+        password_input_field.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (i == KeyEvent.KEYCODE_ENTER)) {
+                    performSignUp(view);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         sign_in_link.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,54 +116,54 @@ public class SignUpFragment extends Fragment {
                 LoginFragment loginFragment = new LoginFragment();
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_container, loginFragment)
-                        .addToBackStack(null)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
             }
         });
-
         sign_up_button.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                String email = email_input_field.getText().toString();
-                String password = password_input_field.getText().toString();
-                String username = username_input_field.getText().toString();
-
-                if (username.isEmpty()) {
-                    username_input_field.setError("Please insert your username");
-                    username_input_field.requestFocus();
-                } else if (email.isEmpty()) {
-                    email_input_field.setError("Please insert your email");
-                    email_input_field.requestFocus();
-                } else if (password.isEmpty()) {
-                    password_input_field.setError("Please insert your password");
-                    password_input_field.requestFocus();
-                }
-                else {
-                    mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(getActivity(),"Welcome To Wagabati",Toast.LENGTH_SHORT).show();
-                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                RestaurantFragment rf = new RestaurantFragment();
-                                fragmentManager.beginTransaction()
-                                        .replace(R.id.main_container, rf)
-                                        .addToBackStack(null)
-                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                        .commit();
-                                ;
-                            }else {
-                                Toast.makeText(getActivity(),"Couldn't sign up, "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-
+                performSignUp(view);
             }
         });
+    }
+
+    void performSignUp(View view){
+        String email = email_input_field.getText().toString().trim();
+        String password = password_input_field.getText().toString();
+        String username = username_input_field.getText().toString().trim();
+
+        if (username.isEmpty()) {
+            username_input_field.setError("Please insert your username");
+            username_input_field.requestFocus();
+        } else if (email.isEmpty()) {
+            email_input_field.setError("Please insert your email");
+            email_input_field.requestFocus();
+        } else if (password.isEmpty()) {
+            password_input_field.setError("Please insert your password");
+            password_input_field.requestFocus();
+        }
+        else {
+            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(getActivity(),"Welcome To Wagabati",Toast.LENGTH_SHORT).show();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        RestaurantFragment rf = new RestaurantFragment();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.main_container, rf)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                .commit();
+                        ;
+                    }else {
+                        Toast.makeText(getActivity(),"Couldn't sign up, "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
 
     }
+
 }

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mutaz_llc.myapplication.R;
 import com.mutaz_llc.myapplication.models.Meal;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +24,12 @@ public class MealsRecyclerAdapter extends RecyclerView.Adapter<MealsRecyclerAdap
 
     private List<Meal> mealsList = new ArrayList<>();
     private final Context mContext;
+    private final int width;
 
-    public MealsRecyclerAdapter(Context context, List<Meal> mealsList){
+    public MealsRecyclerAdapter(Context context, List<Meal> mealsList,int width){
         this.mContext = context;
         this.mealsList = mealsList;
+        this.width=width;
     }
 
     @NonNull
@@ -46,7 +49,13 @@ public class MealsRecyclerAdapter extends RecyclerView.Adapter<MealsRecyclerAdap
         holder.itemDescription.setText(mealsList.get(position).getDescription());
         String txt = Double.toString(mealsList.get(position).getPrice());
         holder.itemPrice.setText(txt);
-        holder.itemImage.setImageResource(R.color.purple_500);
+//        holder.itemImage.setImageResource(R.color.purple_500);
+        Picasso.get()
+                .load(mealsList.get(position).getImageUrl())
+                .resize(250,250)
+                .centerInside()
+                .placeholder(R.drawable.global_layout)
+                .into(holder.itemImage);
 
         holder.incrementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +83,6 @@ public class MealsRecyclerAdapter extends RecyclerView.Adapter<MealsRecyclerAdap
 
         ImageView itemImage;
         TextView itemName, itemDescription, itemPrice, count;
-
         Button incrementBtn, decrementBtn;
 
         public MyViewHolder(@NonNull View itemView) {
